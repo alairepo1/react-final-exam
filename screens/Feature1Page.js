@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import { View, Text, StyleSheet, TextInput, Button, Alert } from "react-native";
 
 export class Feature1Page extends Component {
   constructor(props) {
@@ -11,9 +11,9 @@ export class Feature1Page extends Component {
     };
   }
 
-  componentDidMount = () => {
-    this.fetchAPI();
-  };
+  // componentDidMount = () => {
+  //   this.fetchAPI();
+  // };
 
   fetchAPI = () => {
     // Placeholder for crypto api

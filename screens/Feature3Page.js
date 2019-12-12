@@ -1,27 +1,62 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+  Animated
+} from 'react-native'
 
-export class Feature3Page extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+const arr = []
+for (var i = 0; i < 500; i++) {
+  arr.push(i)
+}
+
+export default class animations extends Component {
+
+  constructor () {
+    super()
+    this.animatedValue = []
+    arr.forEach((value) => {
+      this.animatedValue[value] = new Animated.Value(0)
+    })
   }
-  render() {
+
+  componentDidMount () {
+    this.animate()
+  }
+
+  animate () {
+    const animations = arr.map((item) => {
+      return Animated.timing(
+        this.animatedValue[item],
+        {
+          toValue: 1,
+          duration: 4000
+        }
+      )
+    })
+    Animated.stagger(10, animations).start()
+  }
+
+  render () {
+    const animations = arr.map((a, i) => {
+      return <Animated.View key={i} style={{opacity: this.animatedValue[a], height: 30, width: 30, backgroundColor: 'red', marginLeft: 3, marginTop: 3}} />
+    })
     return (
       <View style={styles.container}>
-        <Text>Animation feature?</Text>
+        {animations}
       </View>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    flexDirection: 'row',
+    flexWrap: 'wrap'
   }
-});
+})
 
-export default Feature3Page;
+AppRegistry.registerComponent('animations', () => animations);
